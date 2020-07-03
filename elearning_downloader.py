@@ -1,9 +1,10 @@
 import PySimpleGUI as sg
 import requests
-import browser_cookie3
 from bs4 import BeautifulSoup
 import re
 import os
+from selenium import webdriver
+from webdriver_manager.firefox import GeckoDriverManager
 
 # funzione per trovare il nome file
 def getFilename_fromCd(cd):
@@ -28,9 +29,16 @@ while True:
     window.close()
     lista=[]
     # imposta il cookie e fai la richiesta all'url
-    cj = browser_cookie3.load(domain_name='elearning.unibs.it')
+    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    driver.get(url)
+    while True:
+      if driver.get_cookie("MoodleSessionunibs")!=None:
+        cookie=str(driver.get_cookie("MoodleSessionunibs")).split("'")[7]
+        break
     session = requests.Session()
-    session.cookies = cj
+    jar = requests.cookies.RequestsCookieJar()
+    jar.set('MoodleSessionunibs', cookie)
+    session.cookies = jar
     r = session.get(url)
     soup = BeautifulSoup(r.text, "html.parser")
 
