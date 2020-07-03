@@ -14,7 +14,7 @@ def getFilename_fromCd(cd):
 		return None
 	return fname[0]
 
-layout = [  [sg.Text('Url Cours'),sg.InputText()],
+layout = [  [sg.Text('Url Course'),sg.InputText()],
             [sg.Button('Download'), sg.Button('Cancel')] ]
 
 # Create the Window
