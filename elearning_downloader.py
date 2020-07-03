@@ -14,8 +14,8 @@ def getFilename_fromCd(cd):
 		return None
 	return fname[0]
 
-layout = [  [sg.Text('Url Corso'),sg.InputText()],
-            [sg.Button('Ok'), sg.Button('Cancel')] ]
+layout = [  [sg.Text('Url Cours'),sg.InputText()],
+            [sg.Button('Download'), sg.Button('Cancel')] ]
 
 # Create the Window
 window = sg.Window('Elearning Course Downloader', layout)
@@ -39,7 +39,7 @@ while True:
       if str(a).find("mod/resource")!= -1:
         lista.append((str(a).split('href="')[1]).split('"')[0])
     
-    layout_pb = [[sg.Text('Download in corso:')],
+    layout_pb = [[sg.Text('Downloading:')],
                 [sg.ProgressBar(len(lista), orientation='h', size=(20, 20), key='progressbar')]]
     window_pb = sg.Window('Elearning Course Downloader', layout_pb,no_titlebar=True)
     progress_bar = window_pb['progressbar']
