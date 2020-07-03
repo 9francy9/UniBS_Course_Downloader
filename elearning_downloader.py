@@ -4,7 +4,7 @@ import browser_cookie3
 from bs4 import BeautifulSoup
 import re
 import os
-import time
+
 # funzione per trovare il nome file
 def getFilename_fromCd(cd):
 	if not cd:
