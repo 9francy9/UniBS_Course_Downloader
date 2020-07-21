@@ -22,4 +22,4 @@ wait while the files are beeing downloaded
 if needed, you can download another course at the end of the process, without re-entering your credentials
 
 ## Tutorial
-you can find a video tutorial [here](https://youtu.be/BLLl3mKlGQs)
+You can find a video tutorial [here](https://youtu.be/BLLl3mKlGQs)
