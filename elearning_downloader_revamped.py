@@ -85,7 +85,7 @@ def main():
         lista=getFileLinks(soup)
         folder= tkinter.filedialog.askdirectory()
         fileDownloader(lista,cookie,folder)
-        continuo=int(input("per scaricare un altro corso premi [1], altrimenti qualsiasi altro tasto"))
+        continuo=int(input("per scaricare un altro corso premi [1], altrimenti qualsiasi altro tasto: "))
         if continuo!=1:
             a=False
 if __name__ == "__main__":
