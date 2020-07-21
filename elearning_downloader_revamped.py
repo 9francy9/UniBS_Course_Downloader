@@ -4,9 +4,8 @@ import re
 import os
 from selenium import webdriver
 from webdriver_manager.firefox import GeckoDriverManager
-from webdriver_manager.chrome import ChromeDriverManager
-from tkinter import filedialog
-from tkinter import *
+import tkinter as tk
+import tkinter.filedialog
 
 # funzione per trovare il nome file
 def getFilename_fromCd(cd):
@@ -19,13 +18,8 @@ def getFilename_fromCd(cd):
 
 #funzione per trovare il cookie
 def getCookie(url):
-    i=int(input("Scegli se usare Chrome [1] o Firefox [2]:"))
-    if i==1:
-        print("Avvio di Chrome in corso...")
-        driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
-    if i==2:
-        print("Avvio di firefox in corso...")
-        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    print("Avvio di firefox in corso...")
+    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
     driver.get(url)
     while True:
         if driver.get_cookie("MoodleSessionunibs")!=None:
@@ -74,18 +68,25 @@ def fileDownloader(lista,cookie,folder):
             open(folder+"/"+(filename.split('"')[1]).split('"')[0], 'wb').write(r.content)
 
 def main():
-    root = Tk()
+    root = tk.Tk()
     root.withdraw()
     os.environ['WDM_LOG_LEVEL'] = '0'
+    a=True
+
     cookie=getCookie("https://elearning.unibs.it/my/")
     soup=getPage("https://elearning.unibs.it/",cookie)
-    lista=getCourseNamesAndLinks(soup)
-    for i in range(0,len(lista)):
-        print("["+str(i+1)+"] "+((str(lista[i]).split(">")[2]).split("<")[0])+"\n")
-    n = int(input('Numero del corso che si vuole scaricare: '))
-    soup=getPage(str(lista[n-1]).split('"')[5],cookie)
-    lista=getFileLinks(soup)
-    folder= filedialog.askdirectory()
-    fileDownloader(lista,cookie,folder)
+    lista_corsi=getCourseNamesAndLinks(soup)
+    
+    while a:
+        for i in range(0,len(lista_corsi)):
+            print("["+str(i+1)+"] "+((str(lista_corsi[i]).split(">")[2]).split("<")[0]))
+        n = int(input('Numero del corso che si vuole scaricare: '))
+        soup=getPage(str(lista_corsi[n-1]).split('"')[5],cookie)
+        lista=getFileLinks(soup)
+        folder= tkinter.filedialog.askdirectory()
+        fileDownloader(lista,cookie,folder)
+        continuo=int(input("per scaricare un altro corso premi [1], altrimenti qualsiasi altro tasto"))
+        if continuo!=1:
+            a=False
 if __name__ == "__main__":
     main()
