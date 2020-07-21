@@ -19,3 +19,6 @@ a list of your courses will be displayed, pick the one you want
 choose a destination folder, in witch all the files are going to be downloaded
 wait while the files are beeing downloaded
 if needed, you can download another course at the end of the process, without re-entering your credentials
+
+## Tutorial
+you can find a video tutorial [here](https://youtu.be/BLLl3mKlGQs)
