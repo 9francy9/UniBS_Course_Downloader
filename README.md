@@ -1,8 +1,9 @@
 # UniBS_Course_Downloader
 A python program that automaticaly downloads files from an elearning course
 
-Works on elearning.unibs.it
-Only works with firefox
+Works on elearning.unibs.it.    
+Only works with firefox.  
+this program can't download Kaltura's videos.  
 
 
 ## Istruzioni
