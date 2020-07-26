@@ -4,6 +4,7 @@ import re
 import os
 from selenium import webdriver
 from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 import tkinter as tk
 import tkinter.filedialog
 
@@ -18,12 +19,17 @@ def getFilename_fromCd(cd):
 
 #funzione per trovare il cookie
 def getCookie(url):
-    print("Avvio di firefox in corso...")
-    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    choice=int(input("Premi [1] per usare chrome, [2] per usare firefox: "))
+    if choice==1:
+        print("Avvio di chrome in corso...")
+        driver = webdriver.Chrome(ChromeDriverManager().install())
+    if choice==2:
+        print("Avvio di firefox in corso...")
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
     driver.get(url)
     while True:
         if driver.get_cookie("MoodleSessionunibs")!=None:
-            cookie=str(driver.get_cookie("MoodleSessionunibs")).split("'")[7]
+            cookie=driver.get_cookie("MoodleSessionunibs")["value"]
             break
     driver.quit()
     return cookie
